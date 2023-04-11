@@ -1,0 +1,63 @@
+//Exercises: Level 1
+
+
+localStorage.setItem('firstName', 'John');
+localStorage.setItem('lastName', 'Doe');
+localStorage.setItem('age', '30');
+localStorage.setItem('country', 'United States');
+localStorage.setItem('city', 'New York');
+
+//Exercises: Level 2
+
+
+const student = {
+  firstName: 'Jane',
+  lastName: 'Doe',
+  age: 25,
+  skills: ['JavaScript', 'HTML', 'CSS'],
+  country: 'Canada',
+  enrolled: true
+};
+
+localStorage.setItem('student', JSON.stringify(student));
+
+//Exercises: Level 3
+
+
+const personAccount = {
+  firstName: 'John',
+  lastName: 'Doe',
+  incomes: [
+    {description: 'Salary', amount: 5000},
+    {description: 'Rent', amount: 1000},
+  ],
+  expenses: [
+    {description: 'Food', amount: 500},
+    {description: 'Transportation', amount: 200},
+  ],
+  totalIncome() {
+    return this.incomes.reduce((total, income) => total + income.amount, 0);
+  },
+  totalExpense() {
+    return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+  },
+  accountInfo() {
+    return `Account Information:\nName: ${this.firstName} ${this.lastName}\nIncome: ${this.totalIncome()}\nExpense: ${this.totalExpense()}`;
+  },
+  addIncome(description, amount) {
+    this.incomes.push({description, amount});
+  },
+  addExpense(description, amount) {
+    this.expenses.push({description, amount});
+  },
+  accountBalance() {
+    const balance = this.totalIncome() - this.totalExpense();
+    return `Account Balance: ${balance}`;
+  }
+};
+
+console.log(personAccount.accountInfo()); // Output: Account Information:\nName: John Doe\nIncome: 6000\nExpense: 700
+personAccount.addIncome('Bonus', 1000);
+personAccount.addExpense('Shopping', 300);
+console.log(personAccount.accountInfo()); // Output: Account Information:\nName: John Doe\nIncome: 7000\nExpense: 1000
+console.log(personAccount.accountBalance()); // Output: Account Balance: 6000
